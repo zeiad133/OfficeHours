@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-3908.582 1963.697 62.802 71.134">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #db0c18;
+        stroke-miterlimit: 10;
+        stroke-width: 3.3px;
+      }
+    </style>
+  </defs>
+  <g id="Group_1160" data-name="Group 1160" transform="translate(-3906.249 1963.697)">
+    <line id="Line_58" data-name="Line 58" class="cls-1" y2="13.204" transform="translate(6.709 57.929)"/>
+    <line id="Line_59" data-name="Line 59" class="cls-1" y2="33.437" transform="translate(6.709)"/>
+    <rect id="Rectangle_716" data-name="Rectangle 716" class="cls-1" width="9.584" height="9.584" transform="translate(6.777 38.696) rotate(45)"/>
+    <line id="Line_60" data-name="Line 60" class="cls-1" y2="32.798" transform="translate(29.071 38.335)"/>
+    <line id="Line_61" data-name="Line 61" class="cls-1" y2="14.269" transform="translate(29.071)"/>
+    <rect id="Rectangle_717" data-name="Rectangle 717" class="cls-1" width="9.584" height="9.584" transform="translate(29.064 19.04) rotate(45)"/>
+    <line id="Line_62" data-name="Line 62" class="cls-1" y2="20.659" transform="translate(51.434 50.475)"/>
+    <line id="Line_63" data-name="Line 63" class="cls-1" y2="25.131" transform="translate(51.434)"/>
+    <rect id="Rectangle_718" data-name="Rectangle 718" class="cls-1" width="9.584" height="9.584" transform="translate(51.359 30.782) rotate(45)"/>
+  </g>
+</svg>

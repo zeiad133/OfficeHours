@@ -1,0 +1,295 @@
+$light: #e6e6e6;
+
+#logo {
+  font-family: "Roboto", Arial, sans-serif;
+  color: #DB0C18;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 90px;
+  font-weight: 800;
+  letter-spacing: -3px;
+  line-height: 1;
+  text-shadow: #EDEDED 3px 2px 0;
+  position: relative;
+}
+#header {
+    border-bottom: 4px double #AAA;
+}
+#logo:after {
+  content:"dreamdealer";
+  position: absolute;
+  left: 8px;
+  top: 32px;
+}
+#logo:after {
+  /*background: url(https://subtlepatterns.com/patterns/crossed_stripes.png) repeat;*/
+  background-image: -webkit-linear-gradient(left top, transparent 0%, transparent 25%, #555 25%, #555 50%, transparent 50%, transparent 75%, #555 75%);
+  background-size: 4px 4px;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  z-index: -5;
+  display: block;
+  text-shadow: none;
+}
+  a.search {
+    display: block;
+    float: right;
+    width: 42px;
+    height: 42px;
+    margin-left: 10px;
+    border: transparent;
+    background-color: #FCE200;
+    background-repeat: no-repeat;
+    background-position: top 12px left 14px;
+    border-radius: 50%;
+}
+.top {
+  position: relative;
+  width: 100%;
+  height: 96px;
+  padding: 29px;
+  &:after {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      display: block;
+      width: 80%;
+      height: 1px;
+      background-color: $light;
+      transform: translate(-50%, 0);
+  }
+}
+input {
+  float: right;
+  width: 188px;
+  height: 42px;
+  padding: 0 15px;
+  border: 1px solid $light;
+  background-color: #eceff1;
+  border-radius: 21px;
+
+}
+/* =======================================================
+*
+* 	Template Style
+*	Edit this section
+*
+* ======================================================= */
+body {
+  font-family: "Roboto", Arial, sans-serif;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 1.6;
+  color: rgba(0, 0, 0, 0.5);
+}
+@media screen and (max-width: 992px) {
+  body {
+    font-size: 16px;
+  }
+}
+
+a {
+  color: #FCE200;
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+}
+a:hover, a:active, a:focus {
+  color: #FCE200;
+  outline: none;
+}
+
+p {
+  margin-bottom: 1.5em;
+}
+
+
+.fh5co-gallery {
+  position: relative;
+  margin-bottom: 7em;
+  float: left;
+  width: 100%;
+}
+.fh5co-gallery .gallery-item {
+  width: 25%;
+  height: 390px;
+  position: relative;
+  overflow: hidden;
+  float: left;
+}
+.fh5co-gallery .gallery-item img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  -o-transform: scale(1.2);
+  transform: scale(1.2);
+  -webkit-transition: 0.9s;
+  -o-transition: 0.9s;
+  transition: 0.9s;
+}
+@media screen and (max-width: 1200px) {
+  .fh5co-gallery .gallery-item {
+    width: 33.3333%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .fh5co-gallery .gallery-item {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 480px) {
+  .fh5co-gallery .gallery-item {
+    width: 100%;
+  }
+}
+.fh5co-gallery .gallery-item .overlay {
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  z-index: 0;
+  vertical-align: middle;
+  padding-top: 30%;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+}
+.fh5co-gallery .gallery-item .overlay h2, .fh5co-gallery .gallery-item .overlay span {
+  position: relative;
+  z-index: 12;
+  margin-bottom: 0;
+  text-align: center;
+  display: block;
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+.fh5co-gallery .gallery-item .overlay h2 {
+  color: #fff;
+  font-size: 26px;
+  font-weight: 300;
+  margin-bottom: 10px;
+  bottom: -15px;
+}
+@media screen and (max-width: 768px) {
+  .fh5co-gallery .gallery-item .overlay h2 {
+    font-size: 18px;
+  }
+}
+.fh5co-gallery .gallery-item .overlay span {
+  color: #FCE200;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 400;
+  bottom: -5px;
+  visibility: hidden;
+  opacity: 0;
+}
+.fh5co-gallery .gallery-item .overlay:before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+.fh5co-gallery .gallery-item:hover img {
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
+}
+.fh5co-gallery .gallery-item:hover .overlay {
+  visibility: visible;
+  opacity: 1;
+}
+.fh5co-gallery .gallery-item:hover .overlay:before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+.fh5co-gallery .gallery-item:hover .overlay h2 {
+  bottom: 0px;
+}
+.fh5co-gallery .gallery-item:hover .overlay span {
+  visibility: visible;
+  opacity: 1;
+  bottom: 0px;
+}
+
+
+.masthead {
+  text-align: center;
+  color: white;
+  width: 100%;
+  background-image: url("assets/login.png");
+  background-color: #FCE200;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.masthead .intro-text {
+  padding-top: 150px;
+  padding-bottom: 100px;
+  width: 100%;
+
+}
+
+.masthead .intro-text .intro-lead-in {
+  font-size: 22px;
+  font-style: italic;
+  line-height: 22px;
+  margin-bottom: 25px;
+  font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.masthead .intro-text .intro-heading {
+  color: #DB0C18;
+  font-size: 4.28571em;
+  font-family: "Proxima Nova bold";
+  position: relative;
+  z-index: 10;
+  max-width: 60%;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .masthead .intro-text {
+    padding-top: 300px;
+    padding-bottom: 200px;
+  }
+  .masthead .intro-text .intro-lead-in {
+    font-size: 40px;
+    font-style: italic;
+    line-height: 40px;
+    margin-bottom: 25px;
+    font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+  .masthead .intro-text .intro-heading {
+    font-size: 75px;
+    font-weight: 700;
+    line-height: 75px;
+    margin-bottom: 50px;
+    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+}

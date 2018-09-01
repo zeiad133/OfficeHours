@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+	<title>Profile</title>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	  content="width=device-width, initial-scale=1">
+	<link rel="stylesheet"
+	  type="text/css"
+	  href="assets/style.css">
+
+	<style>
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5 {
+	font-family: "Open Sans", sans-serif
+}
+	</style>
+
+	<body class="w3-theme-l5">
+
+
+		<!-- Page Container -->
+		<div  class="w3-container  w3-content"
+		  style="max-width:1400px;margin-top:80px">
+			<!-- The Grid -->
+			<div class="w3-row">
+
+
+				<!-- Middle Column -->
+				<div class="w3-col  m7">
+
+					<div class="w3-row-padding">
+						<div class="w3-col m12">
+
+							<div class="w3-container  w3-padding">
+								<div class="wrapper">
+									<div  class="container">
+
+										<ng-container *ngIf="type === 'expert'">
+
+											<div class="left">
+												<div class="top">
+													<h4 (click)="myRequests()"
+													  style="cursor:pointer;margin-left:70px;float:left">My Requests</h4>
+													<h4 (click)="usersRequests()"
+													  style="cursor:pointer;margin-left:15px;float:left">Users Requests</h4>
+
+												
+												</div>
+												<div id="style-4" class="people scrollbar ">
+
+
+
+
+													<div class="person chat"
+													  id="myRequest"
+													  ng
+													  data-chat="person1"
+													  *ngFor="let question of questions; let i=index"
+													  (change)="sum(i)"
+													  (click)="selectQuestion(question)"
+													  [ngClass]="{'selected':questions[i] == i}">
+														<a href="#/messages">
+																						<img src="{{question.expert?question.expert.profilePic:null}}" alt="" />
+													<span class="name">{{ question.expert?question.expert.firstName:null}} {{question.expert?question.expert.lastName:null}}</span>
+
+													<ng-container *ngIf="question.status === 'accepted'">
+
+													<div id="acceptdiv" style="float:right;margin-right:30%">
+													<button class="button button-accept" id="accept" >
+														<svg class="button-icon" width="24" height="24" viewBox="0 0 24 24">
+															<path d="M9 16.172l10.594-10.594 1.406 1.406-12 12-5.578-5.578 1.406-1.406z"></path>
+														</svg>
+														</button>
+														<span style="margin-left:0" class="status">Request is Accepted</span>
+														<span class="typer">(My Request)</span>
+
+													</div>
+												</ng-container>
+												<ng-container *ngIf="question.status === 'pending'">
+
+													<div id="pendingdiv +" style="float:right;margin-right:30%">
+														<button class="button button-pending" id="pending">
+															<svg class="button-icon" width="24" height="24" viewBox="0 0 24 24">
+																<path d="M18.984 6.422l-5.578 5.578 5.578 5.578-1.406 1.406-5.578-5.578-5.578 5.578-1.406-1.406 5.578-5.578-5.578-5.578 1.406-1.406 5.578 5.578 5.578-5.578z"></path>
+															</svg>
+															</button>
+															<span style="margin-left:0" class="status">Request is pending</span>
+															<span class="typer">(My Request)</span>
+
+														</div>
+													</ng-container>
+												<ng-container *ngIf="question.status === 'rejected'">
+
+													<div id="rejectdiv +" style="float:right;margin-right:30%">
+														<button class="button button-reject" id="reject">
+															<svg class="button-icon" width="24" height="24" viewBox="0 0 24 24">
+																<path d="M18.984 6.422l-5.578 5.578 5.578 5.578-1.406 1.406-5.578-5.578-5.578 5.578-1.406-1.406 5.578-5.578-5.578-5.578 1.406-1.406 5.578 5.578 5.578-5.578z"></path>
+															</svg>
+															</button>
+															<span style="margin-left:0" class="status">Request is Rejected</span>
+															<span class="typer">(My Request)</span>
+
+														</div>
+													</ng-container>
+
+													<span class="time">{{question.time}}</span>
+													<span class="preview">{{question.questionContent}} 	</span>
+
+
+
+																					</a>
+													</div>
+
+
+													<div  id="usersRequest">
+													<div class="person chat"
+													 
+													  data-chat="person1"
+													  *ngFor="let request of requests; let i=index"
+													  (change)="sum(i)"
+													  (click)="selectRequest(request)"
+													  [ngClass]="{'selected':requests[i] == i}">
+														<a href="#/messages">
+
+																				<img src="{{request.user?request.user.profilePic:null}}" alt="" />
+											<span class="name">{{request.user?request.user.firstName:null}} {{request.user?request.user.lastName:null}}</span>
+											<ng-container *ngIf="request.status === 'accepted'">
+
+											<div id="acceptdiv" style="float:right;margin-right:30%">
+											<button class="button button-accept" id="accept" >
+												<svg class="button-icon" width="20" height="20" viewBox="0 0 24 24">
+													<path d="M9 16.172l10.594-10.594 1.406 1.406-12 12-5.578-5.578 1.406-1.406z"></path>
+												</svg>
+												</button>
+												<span style="margin-left:0" class="status">Request is Accepted</span>
+												<span class="typer">(User Request)</span>
+
+											</div>
+										</ng-container>
+										<ng-container *ngIf="request.status === 'pending'">
+
+											<div id="pendingdiv +" style="float:right;margin-right:30%">
+												<button class="button button-pending" id="pending">
+													<svg class="button-icon" width="20" height="20" viewBox="0 0 24 24">
+														<path d="M18.984 6.422l-5.578 5.578 5.578 5.578-1.406 1.406-5.578-5.578-5.578 5.578-1.406-1.406 5.578-5.578-5.578-5.578 1.406-1.406 5.578 5.578 5.578-5.578z"></path>
+													</svg>
+													</button>
+													<span style="margin-left:0" class="status">Request is pending</span>
+													<span class="typer">(User Request)</span>
+
+												</div>
+											</ng-container>
+										<ng-container *ngIf="request.status === 'rejected'">
+
+											<div id="rejectdiv +" style="float:right;margin-right:30%">
+												<button class="button button-reject" id="reject">
+													<svg class="button-icon" width="20" height="20" viewBox="0 0 24 24">
+														<path d="M18.984 6.422l-5.578 5.578 5.578 5.578-1.406 1.406-5.578-5.578-5.578 5.578-1.406-1.406 5.578-5.578-5.578-5.578 1.406-1.406 5.578 5.578 5.578-5.578z"></path>
+													</svg>
+													</button>
+													<span style="margin-left:0" class="status">Request is Rejected</span>
+													<span class="typer">(User Request)</span>
+
+												</div>
+											</ng-container>
+
+											<span class="time">{{request.time}}</span>
+											<span class="preview">{{request.questionContent}}
+
+																				</span>
+
+																			</a>
+													</div>
+												</div>
+
+												</div>
+
+											</div>
+
+										</ng-container>
+
+
+										<ng-container *ngIf="type === 'user'">
+
+											<div class="left">
+												<div class="top">
+													<h1 style="float:left">My Requests</h1>
+
+													
+												</div>
+												<div id="style-4" class="people scrollbar  ">
+
+													<div class="person chat"
+													  data-chat="person1"
+													  *ngFor="let question of questions; let i=index"
+													  (change)="sum(i)"
+													  (click)="selectQuestion(question)"
+													  [ngClass]="{'selected':questions[i] == i}">
+														<a href="#/messages">
+                                    <img src="{{question.expert?question.expert.profilePic:null}}" alt="" />
+									<span class="name">{{ question?question.expert?question.expert.firstName:null:null}} {{question.expert?question.expert.lastName:null}}</span>
+									<ng-container *ngIf="question.status === 'accepted'">
+
+									<div id="acceptdiv" style="float:right;margin-right:40%">
+									<button class="button button-accept" id="accept" >
+										<svg class="button-icon" width="24" height="24" viewBox="0 0 24 24">
+										  <path d="M9 16.172l10.594-10.594 1.406 1.406-12 12-5.578-5.578 1.406-1.406z"></path>
+										</svg>
+									  </button>
+									  <span style="margin-left:0" class="status">Request is Accepted</span>
+									</div>
+								</ng-container>
+								<ng-container *ngIf="question.status === 'pending'">
+
+									<div id="pendingdiv +" style="float:right;margin-right:40%">
+										<button class="button button-pending" id="pending">
+											<svg class="button-icon" width="24" height="24" viewBox="0 0 24 24">
+											  <path d="M18.984 6.422l-5.578 5.578 5.578 5.578-1.406 1.406-5.578-5.578-5.578 5.578-1.406-1.406 5.578-5.578-5.578-5.578 1.406-1.406 5.578 5.578 5.578-5.578z"></path>
+											</svg>
+										  </button>
+										  <span style="margin-left:0" class="status">Request is pending</span>
+										</div>
+									</ng-container>
+								<ng-container *ngIf="question.status === 'rejected'">
+
+									<div id="rejectdiv +" style="float:right;margin-right:40%">
+										<button class="button button-reject" id="reject">
+											<svg class="button-icon" width="24" height="24" viewBox="0 0 24 24">
+											  <path d="M18.984 6.422l-5.578 5.578 5.578 5.578-1.406 1.406-5.578-5.578-5.578 5.578-1.406-1.406 5.578-5.578-5.578-5.578 1.406-1.406 5.578 5.578 5.578-5.578z"></path>
+											</svg>
+										  </button>
+										  <span style="margin-left:0" class="status">Request is Rejected</span>
+										</div>
+									</ng-container>
+
+									<span class="time">{{question.time}}</span>
+                                    <span class="preview">{{question.questionContent}}
+
+                                    </span>
+
+                                  </a>
+													</div>
+
+
+												</div>
+											</div>
+
+										</ng-container>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+
+					<!-- End Middle Column -->
+				</div>
+
+
+
+				<!-- End Grid -->
+			</div>
+
+			<!-- End Page Container -->
+		</div>
+		<br>
+
+
+	</body>
+
+</html>

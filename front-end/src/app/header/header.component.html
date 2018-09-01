@@ -1,0 +1,127 @@
+<link rel="stylesheet"
+      type="text/css"
+      href="assets/style.css">
+<div class="w3-top "
+     style="z-index: 15;">
+  <div class="w3-bar w3-card "
+       id="myNavbar"
+       style="height: 60px; width: 100%">
+    <div class="w3-left w3-hide-small"
+         style="height: 60px; width: 100%"> <a *ngIf="!filterAdminHTML"
+         href="#home">
+    <img  src="assets/logo.png" style="height:60px;width:150px" alt="logo"></a>
+      <!-- Right-sided navbar links -->
+      <div *ngIf="filterAdminHTML"
+           class="w3-dropdown-hover w3-hide-small"> <a class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large "
+           title="My Account">
+           <img
+             src="{{user.profilePic}}"
+             class="w3-circle "
+             style="height:35px;width:35px"
+             alt="Avatar"
+           >
+          <div class="w3-dropdown-content w3-card-4 w3-bar-block"
+               style="width:100px;"> <a style="color:black;"
+               href="#/profile"
+               class="w3-bar-item w3-button">{{user.username}} </a> <button href="#/home"
+                style="color:black;"
+                (click)="logout()"
+                class="w3-bar-item w3-button">Logout</button> </div>
+      </a>
+    </div>
+    <div *ngIf="filterAdminHTML"
+         style="display: flex;align-self: center"
+         class="w3-center "> <a (click)="toggleAdminPanel('applications')"
+         class="w3-bar-item w3-button "
+         style="color:black;">Applications </a><a (click)="toggleAdminPanel('users')"
+         class="w3-bar-item w3-button "
+         style="color:black;">Users </a> <a (click)="toggleAdminPanel('experts')"
+         class="w3-bar-item w3-button"
+         style="color:black;"> Experts </a> <a (click)="toggleAdminPanel('sessions')"
+         class="w3-bar-item w3-button "
+         style="color:black;"> Sessions </a> <a (click)="toggleAdminPanel('feedbacks')"
+         class="w3-bar-item w3-button "
+         style="color:black;"> Feedbacks </a> </div>
+    <div *ngIf="!filterAdminHTML"
+         class="flex-container"
+         style="width: 40%;height:76%; position: absolute; top: 12%; left: 15%; display: inline-flex;">
+      <!--
+         <div class = "search">
+            <input type = "checkbox" class = "criteria" >
+            <label for = "criteria"></label>
+            <ul class = "criteria-list">
+              <li style="background-color: white" class = "criteria-item"><span style="color: black" class = "fa fa-book"></span></li>
+              <li style="background-color: white" class = "criteria-item"><span style="color: black" class = "fa fa-user"></span></li>
+
+            </ul>
+            <input type = "search" name = "value" placeholder = "Expert/Topic">
+            <button style="position: absolute;" ><i style="color: black;top:0" class = "fa fa-search"></i></button>
+          </div> --><input id="search"
+             class="w3-input"
+             (keyup.enter)="enterClick($event)"
+             style="width: 200px;height: 32px;padding: 0 15px;border: 1px solid ;background-color: #eceff1;border-radius: 21px;"
+             type="text"
+             placeholder="Search for Experts here"> <select id="selected"
+              style="height: 30px;width:10px;padding: 0 15px;border: 1px solid ;background-color: #eceff1;border-radius: 21px;"
+              class="w3-black ">
+            <option  class="w3-bar-item w3-button w3-light-grey"
+            value="username">Username</option>
+            <option class="w3-bar-item w3-button w3-light-grey"
+              value="topic">Topic</option>
+          </select> </div>
+  </div>
+  <!-- <div class="search-bar">
+      <input   id="search"     (keyup.enter)="enterClick($event)"      type="text" placeholder="Search for Experts here..." required/>
+      
+      <div class="search-icon"></div>
+      
+    </div> -->
+  
+  <div *ngIf="!filterAdminHTML"
+       class="w3-right w3-hide-small"
+       style="position: absolute;right: 0">
+      
+        
+        <a href="#experts"
+       class="w3-bar-item w3-button "
+       style="color:white;">Experts <i class="fa fa-user"></i> </a> <a href="#schedule"
+       class="w3-bar-item w3-button"
+       style="color:white;"> Schedule <i class="fa fa-clock-o"></i> </a>
+    <ng-container *ngIf="type === 'expert'"> <a href="#topics"
+         class="w3-bar-item w3-button "
+         style="color:white;"> Topics <i class="fa fa-book" style="color:#FCE200"></i> </a> </ng-container> <a href="#favourites"
+       class="w3-bar-item w3-button "
+       style="color:white;"> Favourites <i class="fa fa-heart"></i> </a> <span id="counter"
+          style="background-color: #ff4d00;visibility: hidden;"
+          class="counter inbox"> {{notifications > 10? "10+": notifications}} </span> <a href="#/inbox"
+       (click)="add()"
+       class="w3-bar-item w3-button"
+       title="Messages"
+       style="color:white;"> <i class="fa fa-envelope"></i> </a>
+    <div class="w3-dropdown-hover w3-hide-small"
+         style="    right: 0;"> <a class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large ">
+
+                          <img
+                            src="{{user.profilePic}}"
+                            class="w3-circle "
+                            style="height:35px;width:35px"
+                            alt="Avatar"
+                          >
+                            <div
+                              class="w3-dropdown-content w3-card-4 w3-bar-block"
+                              style="width:100px; right: 0px;position: absolute" >
+                              <a
+                                href="#/profile"
+                                style="color:black;"
+                                class="w3-bar-item w3-button"
+
+                              >{{user.username}} </a> <button href="#/home"
+              style="color:black;"
+              (click)="logout()"
+              class="w3-bar-item w3-button">Logout</button> </div>
+    </a>
+  </div>
+</div> <a href="javascript:void(0)"
+   class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium"
+   onclick="w3_open()"> <i class="fa fa-bars"></i> </a> </div>
+</div>

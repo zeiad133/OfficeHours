@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+	<title>Profile</title>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	  content="width=device-width, initial-scale=1">
+	<link rel="stylesheet"
+	  type="text/css"
+	  href="assets/style.css">
+
+	<style>
+	</style>
+
+	<body class="w3-theme-l5">
+		<!-- Page Container -->
+		<div class="w3-container w3-content"
+		  style="max-width:1400px;margin-top:60px">
+			<!-- The Grid -->
+			<div class="w3-row">
+
+
+
+				<!-- Middle Column -->
+				<div class="w3-col m7">
+
+					<div class="w3-row-padding">
+						<div class="w3-col m12">
+
+							<div class="w3-container w3-padding">
+								<div class="profile-card ">
+									<div class="profile-cover"
+									  style="  margin-top: 20px;  background: url('assets/new.jpg') center;">
+
+
+										<div class="profile-avatar">
+
+										<a href="#"><img src="{{user.profilePic}}" style="width: 100%;
+                              height: 100%;" alt="Anis M" /> </a>
+
+
+
+
+										</div>
+										<div class="profile-details">
+
+											<h2>{{user.firstName}} {{user.lastName}} </h2>
+											<h3>({{user.username}}) </h3>
+											<h5>{{user.job}}</h5>
+											<div class="profile-social-links">
+												<a class="social-btn twitter"
+												  href="#"><i class="fa fa-twitter"></i></a><a class="social-btn instagram"
+												  href="#"><i class="fa fa-instagram"></i></a><a class="social-btn facebook"
+												  href="#"><i class="fa fa-facebook"></i></a>
+											</div>
+										</div>
+									</div>
+
+
+
+									<div class=" profile-content  "
+									  style="text-align:center;"><br>
+										<div class="masthead">
+												<div class="intro-text">
+												<div class="intro-heading text-uppercase">Rating</div>
+											 
+											</div>
+											</div>	
+																				<span class="rating-num">{{user.avgRating}}</span>
+										<ng-container *ngIf="user.avgRating === 5">
+											<div class="rating-stars"> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="active icon-star " style="color:#FCE200 "></i></span>												<span><i class="active icon-star " style="color:#FCE200 "></i></span> </div>
+										</ng-container>
+										<ng-container *ngIf="user.avgRating <5 && user.avgRating>4">
+											<div class="rating-stars"> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="active icon-star " style="color:#FCE200 "></i></span>												<span><i class="fa fa-star-half-full " style="color:#FCE200 "></i></span> </div>
+										</ng-container>
+										<ng-container *ngIf="user.avgRating === 4">
+											<div class="rating-stars"> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="active icon-star " style="color:#FCE200 "></i></span>												<span><i class="icon-star"></i></span> </div>
+										</ng-container>
+										<ng-container *ngIf="user.avgRating <4 && user.avgRating>3 ">
+											<div class="rating-stars"> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="fa fa-star-half-full " style="color:#FCE200 "></i></span>												<span><i class="icon-star " ></i></span> </div>
+										</ng-container>
+										<ng-container *ngIf="user.avgRating === 3">
+											<div class="rating-stars"> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="icon-star"></i></span>												<span><i class="icon-star"></i></span> </div>
+										</ng-container>
+										<ng-container *ngIf="user.avgRating <3 && user.avgRating>2 ">
+											<div class="rating-stars"> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="fa fa-star-half-full" style="color:#FCE200"></i></span> <span><i class="icon-star" ></i></span>												<span><i class="icon-star " ></i></span> </div>
+										</ng-container>
+										<ng-container *ngIf="user.avgRating === 2">
+											<div class="rating-stars"> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="icon-star"></i></span> <span><i class="icon-star"></i></span> <span><i class="icon-star"></i></span>												</div>
+										</ng-container>
+										<ng-container *ngIf="user.avgRating <2 && user.avgRating>1">
+											<div class="rating-stars"> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="fa fa-star-half-full" style="color:#FCE200"></i></span> <span><i class="icon-star" ></i></span> <span><i class="icon-star" ></i></span> <span><i class="icon-star " ></i></span>												</div>
+										</ng-container>
+										<ng-container *ngIf="user.avgRating === 1">
+											<div class="rating-stars"> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="icon-star"></i></span> <span><i class="icon-star"></i></span> <span><i class="icon-star"></i></span> <span><i class="icon-star"></i></span> </div>
+										</ng-container>
+										<ng-container *ngIf="user.avgRating <1 && user.avgRating>0">
+											<div class="rating-stars"> <span><i class="fa fa-star-half-full" style="color:#FCE200"></i></span> <span><i class="icon-star" ></i></span> <span><i class="icon-star" ></i></span> <span><i class="icon-star" ></i></span> <span><i class="icon-star " ></i></span> </div>
+										</ng-container>
+										<ng-container *ngIf="user.avgRating === 0">
+											<div class="rating-stars"> <span><i class="icon-star"></i></span> <span><i class="icon-star"></i></span> <span><i class="icon-star"></i></span> <span><i class="icon-star"></i></span> <span><i class="icon-star"></i></span> </div>
+										</ng-container>
+
+										<hr style=" height:2px;border:none;margin:50px;background-color:black;color:black">
+										<div class="masthead">
+												<div class="intro-text">
+												<div class="intro-heading text-uppercase">About</div>
+											 
+											</div>
+											</div>
+										<h6 style="color:black;">
+                            {{user.about}}</h6>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				
+
+
+
+
+					
+
+
+					<div id="style-4"
+					  style="margin-left:130px;margin-top:20px;width: 900px;"
+					  class="w3-container scrollbar w3-card w3-white w3-round "><br>
+						<div id="workexperience"
+						  class="sectionClass">
+							<div class="row ">
+								<div>
+										<div class="masthead">
+												<div class="intro-text">
+												<div class="intro-heading text-uppercase">Work Experience</div>
+											 
+											</div>
+											</div>
+								</div>
+								<div class="fullWidth eight columns">
+									<div class="cbp_tmtimeline"
+									  *ngFor="let experience of experiences">
+										<li>
+											<div class="cbp_tmicon cbp_tmicon-phone">
+												<i class="faPra fa-briefcase"></i>
+											</div>
+											<div class="cbp_tmlabel wow fadeInRight animated">
+												<h3>{{experience.job}}</h3>
+												<div class="date">
+													<i class="fa fa-calendar"></i>{{experience.Date}}
+												</div>
+												<h4><i class="fa fa-flag"></i>{{experience.CompanyName}}</h4>
+												<p class="projectParagraph">{{experience.Details}}</p>
+											</div>
+										</li>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+
+					<!-- End Middle Column -->
+				</div>
+
+				<!-- Right Column -->
+
+
+				<div class="w3-col m2"
+				  style="float:right;margin-top:40px;width:300px;">
+
+
+				
+
+
+
+
+					<div class="w3-card w3-round w3-white w3-center">
+						<div class="w3-container">
+							<h4 style="font:bold">Contact </h4>
+							<hr style=" height:2px;border:none;background-color:black;color:black">
+							<a style="float:left;"
+							  href=""><i style="margin-right:15px" class="fa fa-envelope"></i> {{user.email}}</a><br>
+							<a style="float:left;"
+							  href=""><i style="margin-right:17px" class="fa fa-phone"></i> {{user.phoneNumber}}</a><br>
+							<a style="float:left;"
+							  href=""><i style="margin-right:17px" class="fa fa-map-marker"></i> {{user.address}}</a><br>
+
+						</div>
+					</div>
+
+
+					<!-- End Right Column -->
+				</div>
+
+				<!-- End Grid -->
+			</div>
+
+			<!-- End Page Container -->
+		</div>
+		<br>
+
+		<div id="modal"
+		  class="w3-center w3-modal w3-animate-opacity">
+			<div class="w3-modal-content w3-sand"> <span onclick="document.getElementById('modal').style.display='none'"
+				  class="w3-button w3-display-topright">&times;</span>
+				<h2 style="color: black"
+				  class="w3-xxlarge w3-black w3-padding-48">{{responseMessage}}</h2> </div>
+		</div>
+
+	</body>
+
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <title>Office Hours</title>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+  <link rel="stylesheet"
+        type="text/css"
+        href="assets/style.css">
+ 
+
+  <body>
+    <div id="modal"
+         class="w3-center w3-modal w3-animate-opacity">
+      <div class="w3-modal-content w3-sand"> <span onclick="document.getElementById('modal').style.display='none'"
+              class="w3-button w3-display-topright">&times;</span>
+        <h2 style="color: black"
+            class="w3-xxlarge w3-black w3-padding-48">{{responseMessage}}</h2> </div>
+    </div>
+
+    <div style="width: 100%;height: 100%;" class="masthead">
+      <div style="width: 100%;height: 100%;" class="container">
+        <div class="intro-text">
+          <div class="intro-heading text-uppercase">Experts</div>
+          <p><a (click)="onClick()"><h1><i class="fa fa-angle-double-down" style="color:#DB0C18;cursor: pointer;"></i></h1></a></p>
+          <br><br>
+        </div>
+      </div>
+    </div>
+    <!-- Experts Section --><br>
+  
+   <div id="experts">
+      <h2 style="font: bold;color: #DB0C18;margin-left: 100px">You can select expert or more to send a request</h2>
+
+     <br>
+    <div  style="display: flex; flex-direction: row;padding:5px">
+      
+        <div class="experts-side-bar">
+            <img [hidden]="f1" (click)="open()" style="width: 35px;height: 35px;" src="assets/filter2.svg" alt=""> 
+            <img [hidden]="f2" (click)="close()" style="width: 35px;height: 35px;" src="assets/filter2.svg" alt=""> 
+
+
+                 <form [hidden]="sort"  >
+            <br> 
+              <label for="lname" style="font:bold; color:#DB0C18">Username</label><br>
+              <input type="radio" id="ratingAsc" name="ratings" value="asc"><label for="rating" ></label> <i class="fa fa-sort-alpha-asc" style="color:black"></i><br>
+              <input type="radio" id="ratingDesc" name="ratings" value="desc"><label for="rating"></label> <i class="fa fa-sort-alpha-desc" style="color:black"></i><br>
+              <label for="lname" style="font:bold;color:#DB0C18">Ratings</label><br>
+              <input type="radio" id="ratingAscR" name="ratings" value="ascR"><label for="rating"></label> <i class="fa fa-sort-amount-asc" style="color:black"></i><br>
+              <input type="radio" id="ratingDescR" name="ratings" value="descR"><label for="rating"></label> <i class="fa fa-sort-amount-desc" style="color:black"></i><br>
+                <input class="w3-button  w3-padding-large w3-small  w3-hover-opacity-off" style="background-color: black;color:white"  type="submit" value="Sort" (click)="myfilter('ratings')" /> <br> </form>
+        
+      </div>
+
+      <div id="experts" class="fh5co-gallery"
+           style="border-bottom: 4px double #AAA;border-top: 4px double #AAA;">
+           <a class="gallery-item"
+           (click)="toggleExpert(expert)"
+           *ngFor="let expert of experts">
+
+          <input id="expertView{{expert.view_id}}" type="checkbox" style="left: 2%;top: 2%; width: 7%; height: 7%; position: absolute; z-index: 1;border:#DB0C18" disabled/>
+          <div  style=" float:right; right: 2%;top: 2%;  position: absolute; z-index: 1;cursor: pointer;" ><h4 style="color:#FCE200; font-weight: bold;font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">{{expert.avgRating}}</h4></div>
+          <div id="expertView2{{expert.view_id}}" (click)="getProfile(expert)" style=" float:right; right: 2%;bottom: 2%;  position: absolute; z-index: 1;cursor: pointer;" ><h6 style="color:white">View Profile</h6></div>
+          <div id="expertView3{{expert.view_id}}" (click)="addFav(expert.username)" style=" float:left; left: 4%;bottom: 2%;  position: absolute; z-index: 1;cursor: pointer;" ><h3 style="color:#DB0C18"><i style="color:white" class="fa fa-heart"></i></h3></div>
+
+          <img src={{expert.profilePic}} style="position: absolute; z-index: 0">
+          <span class="overlay">
+            <h1 href="#"  style="text-align:center;color:white;cursor: pointer;">
+              {{expert.firstName}}
+              {{expert.lastName}}
+            </h1>
+            <span style = "font-size: 20px; color:white; font-weight: bold">  
+              {{expert.username}}
+            </span>
+            <span >
+              {{expert.job}}
+            </span>
+            <br>
+            <br><br><br><br><br>
+            <span></span>
+          </span>
+        </a> </div>
+     
+    </div>
+    </div>
+    <div>
+      <p><a id="requester"
+           (click)="sendRequest()"
+           class="w3-button w3-black w3-padding-large w3-xlarge w3-opacity w3-hover-opacity-off"
+           style="visibility:hidden;position: fixed;bottom: 0;right: 0">Request</a></p>
+    </div>
+  </body>
+
+</html>

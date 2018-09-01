@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <title>Office Hours</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="assets/style.css">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style></style>
+
+  <body>
+    <!-- Experts Section -->
+
+    <br><br>
+    <div></div>
+    <div>
+      <div class="w3-center">
+        <h1 class=" w3-animate-opacity w3-slim w3-margin-top w3-tag w3-center">ALL EXPERTS</h1>
+      </div>
+      <div class="fh5co-gallery ">
+        <a class="gallery-item" href="single.html" *ngFor="let expert of experts">
+              <img src={{expert.image}}>
+              <span class="overlay">
+                <h1 style="text-align:center;">
+                  {{expert.name}}
+                </h1>
+                <span>
+                  {{expert.description}}
+                </span>
+                <br>
+                <br><br><br><br><br>
+
+                <span>{{expert.field}}
+                </span>
+
+              </span>
+            </a>
+        <a *ngIf="visible" (click)="vis()" style="float:right;  cursor: pointer; ">
+          See more...</a>
+
+      </div>
+    </div>
+    <a *ngIf="visible" (click)="vis()" style="float:right;  cursor: pointer; ">See more...</a>
+
+    <!-- Contact Section -->
+    <div class="w3-container w3-light-grey" style="padding:128px 16px" id="contact">
+      <h3 class="w3-center">CONTACT</h3>
+      <p class="w3-center w3-large">Lets get in touch. Send us a message:</p>
+      <div class="w3-row-padding" style="margin-top:64px">
+        <div class="w3-half">
+          <p>
+            <i class="fa fa-map-marker fa-fw w3-xxlarge w3-margin-right"></i> Chicago, US</p>
+          <p>
+            <i class="fa fa-phone fa-fw w3-xxlarge w3-margin-right"></i> Phone: +00 151515</p>
+          <p>
+            <i class="fa fa-envelope fa-fw w3-xxlarge w3-margin-right"></i> Email: mail@mail.com</p>
+          <br>
+          <form action="/action_page.php" target="_blank">
+            <p><input class="w3-input w3-border" type="text" placeholder="Name" required="required" name="Name"></p>
+            <p><input class="w3-input w3-border" type="text" placeholder="Email" required="required" name="Email"></p>
+            <p><input class="w3-input w3-border" type="text" placeholder="Subject" required="required" name="Subject"></p>
+            <p><input class="w3-input w3-border" type="text" placeholder="Message" required="required" name="Message"></p>
+            <p>
+              <button class="w3-button w3-black" type="submit">
+                <i class="fa fa-paper-plane"></i>
+                SEND MESSAGE
+              </button>
+            </p>
+          </form>
+        </div>
+        <div class="w3-half">
+          <!-- Add Google Maps -->
+          <div id="googleMap" class="w3-greyscale-max" style="width:100%;height:510px;"></div>
+        </div>
+      </div>
+    </div>
+
+
+  </body>
+
+</html>

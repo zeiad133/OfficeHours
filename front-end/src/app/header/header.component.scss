@@ -1,0 +1,350 @@
+
+
+body .custom-scrollbar ::-webkit-scrollbar {
+    width: 1em;
+}
+
+body .custom-scrollbar::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+body .custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+.counter{
+  background-color: #ff4d00;
+  background-clip: padding-box;
+  border: 1px solid #171717;
+  border-radius: 140px;
+  color: white;
+  font: bold 10px "Helvetica Neue", sans-serif;
+  padding: 2px 4px 2px 4px;
+  position: absolute;
+  right: 85px;
+  top: 2px;
+  text-decoration: none;
+  transform: scale(1.2);
+  -ms-transform: scale(1.2); /* IE 9 */
+  -webkit-transform: scale(1.2); /* Chrome, Safari, Opera */
+}
+
+.counter.hidded{
+  -webkit-animation: hide-counter .7s; /* Chrome, Safari, Opera */
+  animation: hide-counter .7s;
+  opacity: 0;
+  display: block;
+}
+
+@-webkit-keyframes hide-counter {
+  0% {
+    opacity: 1;
+  }
+  70% {
+    transform: scale(1.6);
+    -ms-transform: scale(1.6); /* IE 9 */
+    -webkit-transform: scale(1.6); /* Chrome, Safari, Opera */
+  }
+  80% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-0.5em, 0.4em) scale(0.3);
+    -ms-transform: translate(-0.5em, 0.4em) scale(0.3); /* IE 9 */
+    -webkit-transform: translate(-0.5em, 0.4em) scale(0.3); /* Chrome, Safari, Opera */
+  }
+}
+
+@keyframes hide-counter {
+  0% {
+    opacity: 1;
+  }
+  70% {
+    transform: scale(1.6);
+    -ms-transform: scale(1.6); /* IE 9 */
+    -webkit-transform: scale(1.6); /* Chrome, Safari, Opera */
+  }
+  80% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-0.5em, 0.4em) scale(0.3);
+    -ms-transform: translate(-0.5em, 0.4em) scale(0.3); /* IE 9 */
+    -webkit-transform: translate(-0.5em, 0.4em) scale(0.3); /* Chrome, Safari, Opera */
+  }
+}
+
+.fa-user{
+  color: #FCE200;
+}
+
+//======search
+
+/* -- colors -- */
+$light-blue: rgb(0, 204, 255);
+$blue: rgb(0, 102, 255);
+$dark-blue: rgb(0, 43, 128);
+
+$light-green: rgb(51, 204, 51);
+$green: rgb(0, 153, 51);
+$dark-green: rgb(0, 102, 0);
+
+$criteria-transition: transform 0.5s, top 0.5s;
+
+$menu-item-count: 4;
+
+
+
+.search{
+  margin: auto;
+  position: relative;
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40%;
+
+  button{
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    height: 20px;
+    margin: 10px 10px 10px -30px;
+    outline: none;
+    padding: 0px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 20px;
+  }
+
+  input{
+    &[name = "value"]{
+      border: none;
+      border-radius: 4px;
+      box-shadow: 1px 1px 8px rgba(0,0,0,0.8);
+      height: 40px;
+      outline: none;
+      padding: 10px 10px 10px 40px;
+      width: 100%;
+    }
+  }
+  .criteria{
+    cursor: pointer;
+    height: 20px;
+    outline: none;
+    margin: 10px;
+    opacity: 0;
+    position: absolute;
+    width: 20px;
+    z-index: 2;
+  }
+  .criteria:checked{
+    & + label {
+      background: transparent;
+    }
+
+    & + label:before,
+    & + label:after {
+      top: 0;
+      transform-origin: 50% 50%;
+      width: 20px;
+    }
+
+    & + label:before {
+      transform: rotate(-45deg);
+    }
+
+    & + label:after {
+      transform: rotate(45deg);
+    }
+  } /* -- end criteria:checked -- */
+  .criteria:checked ~ .criteria-list{
+    .criteria-item{
+      opacity: 1;
+    }
+
+    @for $i from 0 through $menu-item-count - 1 {
+      .criteria-item:nth-child(#{$i + 1}){
+        transform:   translateX(-60px + (-50px * $i))
+                     translateY(-8px );
+      }
+    }
+  } /* -- end criteria:checked ~ .criteria-list -- */
+  .criteria + label{
+    background-color: black;
+    height: 2px;
+    margin: 5px 10px;
+    position: absolute;
+    top: 14px;
+    transition: $criteria-transition;
+    width: 20px;
+
+    &:before,
+    &:after {
+      background-color: black;
+      content: "";
+      display: block;
+      height: inherit;
+      left: 0;
+      position: absolute;
+      transition: $criteria-transition;
+      width: 100%;
+    }
+
+    &:before {
+      top: -6px;
+    }
+
+    &:after {
+      top: 6px;
+    }
+  } /* -- end criteria + label -- */
+
+  .criteria-list{
+    display: block;
+    height: 20px;
+    left: 0px;
+    list-style: none;
+    margin: 10px;
+    padding: 0px;
+    position: absolute;
+    text-decoration: none;
+    width: 20px;
+
+    > .criteria-item{
+      border: 1px solid black;
+      border-radius: 50%;
+      cursor: pointer;
+      display: block;
+      font-size: 10px;
+      height: 40px;
+      opacity: 0;
+      position: absolute;
+      text-align: center;
+      transition: 0.2s;
+      width: 40px;
+
+      > span{
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        width: 40px;
+      }
+
+      &:hover {
+        background-color: black;
+      }
+
+      &:hover > span{
+        color: white;
+      }
+
+      &.selected{
+        background-color: black;
+
+        > span{
+          color: white;
+        }
+      }
+    } /* -- > .criteria-item -- */
+
+  } /* -- .criteria-list -- */
+} /* -- end search -- */
+
+
+
+$size: 20px;
+
+.search-bar {
+  height: auto;
+  width: auto;
+  position: absolute;
+  display: inline-block;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  
+  input {
+    height: 44px;
+    width: 44px;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    font-size: 18px;
+    border: $size/10 solid transparent;
+    border-radius: 44px;
+    cursor: pointer;
+    background-color: transparent;
+    transition: all 0.5s ease-out;
+    
+    color: transparent;
+    &::placeholder {
+      color: transparent;
+    }
+    
+    &:invalid {
+      box-shadow: none;
+    }
+    
+    &:hover {
+      border: $size/10 solid #FFF;
+      box-shadow: 0 0 $size/10 $size/10 #EEE;
+    }
+    
+    &:focus, &:valid {
+      width: 300px;
+      border: $size/10 solid #CCC;
+      outline: none;
+      cursor: auto;
+      background-color: #FFF;
+      color: #000;
+      
+      &::placeholder {
+        color: #999;
+      }
+      
+      + .search-icon {
+        z-index: 0;
+        border-color: #CCC;
+        right: 20px;
+        
+        &:after {
+          background-color: #CCC;
+        }
+      }
+    }
+  }
+}
+
+
+
+.search-icon {
+  display: inline-block;
+  height: $size;
+  width: $size;
+  border-radius: 50%;
+  border: $size/10 solid #FFF;
+  position: absolute;
+  right: 12px;
+  top: 8px;
+  z-index: -1;
+  
+  &:after {
+    content: '';
+    position: absolute;
+    top: $size/2 + $size/4*1.414 + $size/10;
+    left: $size/2 + $size/4*1.414;
+    transform: rotate(45deg);
+    height: $size/10;
+    width: $size/2;
+    background-color: #FFF;
+    border-radius: 10px;
+  }
+}

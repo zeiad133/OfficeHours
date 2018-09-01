@@ -1,0 +1,302 @@
+<html>
+
+  <head>
+    <link rel="stylesheet"
+          type="text/css"
+          href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          type="text/css"
+          href="assets/style.css">
+    <script type='text/javascript'
+            src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type='text/javascript'
+            src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <title></title>
+    <script type="text/javascript"
+            src="https://api.bistri.com/bistri.conference.min.js"></script>
+    <script type="text/javascript">
+/*
+            JS library reference:
+            http://developers.bistri.com/webrtc-sdk/js-library-reference
+        */
+var room;
+var members;
+var localStream;
+// when Bistri API client is ready, function
+// "onBistriConferenceReady" is invoked
+onBistriConferenceReady = function()
+{
+  // test if the browser is WebRTC compatible
+  if (!bc.isCompatible())
+  {
+    // if the browser is not compatible, display an alert
+    alert("your browser is not WebRTC compatible !");
+    // then stop the script execution
+    return;
+  }
+  // initialize API client with application keys
+  // if you don't have your own, you can get them at:
+  // https://api.developers.bistri.com/login
+  bc.init(
+  {
+    "appId": "30e0a33e",
+    "appKey": "affb9c2704d6459708daa78a4aec314e"
+  });
+  /* Set events handler */
+  // when local user is connected to the server
+  bc.signaling.bind("onConnected", function()
+  {
+    // show pane with id "pane_1"
+    showPanel("pane_1");
+  });
+  // when an error occured on the server side
+  bc.signaling.bind("onError", function(error)
+  {
+    // display an alert message
+    alert(error.text + " (" + error.code + ")");
+  });
+  // when the user has joined a room
+  bc.signaling.bind("onJoinedRoom", function(data)
+  {
+    // set the current room name
+    room = data.room;
+    members = data.members;
+    // ask the user to access to his webcam
+    bc.startStream("webcam-sd", function(stream)
+    {
+      // affect stream to "localStream" var
+      localStream = stream;
+      // when webcam access has been granted
+      // show pane with id "pane_2"
+      showPanel("pane_2");
+      // insert the local webcam stream into div#video_container node
+      bc.attachStream(stream, q("#video_container"),
+      {
+        mirror: true
+      });
+      // then, for every single members present in the room ...
+      for (var i = 0, max = members.length; i < max; i++)
+      {
+        // ... request a call
+        bc.call(members[i].id, room,
+        {
+          "stream": stream
+        });
+      }
+    });
+  });
+  // when an error occurred while trying to join a room
+  bc.signaling.bind("onJoinRoomError", function(error)
+  {
+    // display an alert message
+    alert(error.text + " (" + error.code + ")");
+  });
+  // when the local user has quitted the room
+  bc.signaling.bind("onQuittedRoom", function(room)
+  {
+    // stop the local stream
+    bc.stopStream(localStream, function()
+    {
+      // remove the stream from the page
+      bc.detachStream(localStream);
+      // show pane with id "pane_1"
+      showPanel("pane_1");
+    });
+  });
+  // when a new remote stream is received
+  bc.streams.bind("onStreamAdded", function(remoteStream)
+  {
+    // insert the new remote stream into div#video_container node
+    bc.attachStream(remoteStream, q("#video_container_2"));
+  });
+  // when a remote stream has been stopped
+  bc.streams.bind("onStreamClosed", function(stream)
+  {
+    // remove the stream from the page
+    bc.detachStream(stream);
+  });
+  // when a local stream cannot be retrieved
+  bc.streams.bind("onStreamError", function(error)
+  {
+    switch (error.name)
+    {
+      case "PermissionDeniedError":
+        alert("Webcam access has not been allowed");
+        bc.quitRoom(room);
+        break
+      case "DevicesNotFoundError":
+        if (confirm("No webcam/mic found on this machine. Process call anyway ?"))
+        {
+          // show pane with id "pane_2"
+          showPanel("pane_2");
+          for (var i = 0, max = members.length; i < max; i++)
+          {
+            // ... request a call
+            bc.call(members[i].id, room);
+          }
+        }
+        else
+        {
+          bc.quitRoom(room);
+        }
+        break
+    }
+  });
+  // bind function "joinConference" to button "Join Conference Room"
+  q("#join").addEventListener("click", joinConference);
+  // bind function "quitConference" to button "Quit Conference Room"
+  q("#quit").addEventListener("click", quitConference);
+  // open a new session on the server
+  bc.connect();
+}
+// when button "Join Conference Room" has been clicked
+function joinConference()
+{
+  var roomToJoin = "vineet";
+  // if "Conference Name" field is not empty ...
+  if (roomToJoin)
+  {
+    // ... join the room
+    bc.joinRoom(roomToJoin);
+  }
+  else
+  {
+    // otherwise, display an alert
+    alert("you must enter a room name !")
+  }
+}
+// when button "Quit Conference Room" has been clicked
+function quitConference()
+{
+  // quit the current conference room
+  bc.quitRoom(room);
+}
+
+function showPanel(id)
+{
+  var panes = document.querySelectorAll(".pane");
+  // for all nodes matching the query ".pane"
+  for (var i = 0, max = panes.length; i < max; i++)
+  {
+    // hide all nodes except the one to show
+    panes[i].style.display = panes[i].id == id ? "block" : "none";
+  };
+}
+
+function q(query)
+{
+  // return the DOM node matching the query
+  return document.querySelector(query);
+}
+
+    </script>
+    <style type="text/css">
+video {
+  width: 100%
+}
+
+body {
+  background-color: #E6E6FA;
+}
+
+.container-fluid {
+  background-image: linear-gradient(90deg, white, white);
+}
+
+    </style>
+  </head>
+
+  <body>
+    <div class="container-fluid"
+         style="height:100px "> </div>
+    <div class="pane"
+         id="pane_1"
+         style="display: block;float: left;"> <br> <input (click)="joinConference()" style="background: #FCE200;color: black;border: none"
+             type="button"
+             value="Video"
+             id="join"
+             class="btn btn-lg btn-success"> <input (click)="ready()"  style="background: #FCE200;color: black;border: none"
+             type="button"
+             value="ready for video"
+             id="ready"
+             class="btn btn-lg btn-success"> </div>
+             
+    <div class=" pane"
+         id="pane_2"
+         style="display: none;float: left;">
+      <div style="width: 100px;" id="video_container"></div>
+      
+      <div  style="width: 90px;" id="video_container_2"></div>
+       <input type="button"
+             value="Quit Conference Room"
+             id="quit"
+             class="btn btn-danger btn-default btn-block"> 
+           
+            </div>
+                    
+    <div  class="container-fluid">
+      <div id="session"  class="w3-center">
+          <div class="intro-heading text-uppercase">Session </div>
+        </div>
+      <div class="row">
+        <div id="session2" class="col-sm-5"> <label for="roomInput">Choose room</label> <input type="text"
+                 [(ngModel)]="room"
+                 class="form-control"
+                 id="roomInput"
+                 placeholder="Enter the room name"> </div>
+        <div class="col sm-2">
+          <div style="margin-top:19px;"
+               class="pull-right">
+            <div id="joo"> <button type="button"
+                      class="btn btn-primary" style="background: #FCE200;color: black;border: none"
+                      (click)="join()">Join</button> </div>
+            <div id="leave"> 
+                      <div class="chat">
+                          <button type="button"
+                          class="btn btn-default" style="background:#DB0C18;color: white "
+                          (click)="leave()">Leave</button>
+                        <div class="chat-title">
+                          <h1>{{user.firstName}} {{user.secondName}}</h1>
+                          <h2>{{user.username}}</h2>
+                          <figure class="avatar">
+                            <img src="{{user.profilePic}}" /></figure>
+                        </div>
+                        <div  class="messages " >
+                            <div id="style-4" class="messages-content scrollbar" >
+                              <div  *ngFor="let item of messageArray" > 
+                                <ng-container *ngIf="username === item.user.username">
+                                    <div class="message message-personal">
+                              <span><strong>{{item.user.username}} : </strong> {{item.message}} </span> 
+                              <div class="timestamp">{{h}}:{{m}}</div> 
+
+                            </div>
+                            </ng-container>
+                            <ng-container *ngIf="username !== item.user.username">
+                                <div  class="message ">
+                          <span><figure class="avatar"><img style="width: 100%;height: 100%;" src="{{item.user.profilePic}}" /></figure><strong>{{item.user.username}} : </strong> {{item.message}} </span>
+                          <div class="timestamp">{{h}}:{{m}}</div> 
+                        </div>
+                        </ng-container>
+                            </div>
+                             </div>
+                            
+                                  
+                          
+                        </div>
+                        <div class="message-box">
+                          <textarea type="text" [(ngModel)]="messageText" class="message-input" placeholder="Type message..."></textarea>
+                          <button type="submit" (click)="sendMessage()" class="message-submit">Send</button>
+                        </div>
+                      
+                      </div>
+                      <div class="bg"></div> 
+                      <br> <br> <br><br> <br> <br> <br> <br> <br> <br><br><br><br><br><br><br> </div>
+          </div>
+        </div>
+      </div>
+     
+    </div>    
+    
+  </body>
+
+</html>

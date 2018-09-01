@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+	<title>Profile</title>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, initial-scale=1">
+	<link rel="stylesheet"
+	      type="text/css"
+	      href="assets/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400|Source+Sans+Pro:200,300,400"
+		  rel="stylesheet">
+		  <meta charset="utf-8">
+		  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		  <meta name="description" content="Sticky Notes by Edmond Ko">
+	  <meta name="author" content="Edmond Ko">
+		   <link href='https://fonts.googleapis.com/css?family=Gloria+Hallelujah' rel='stylesheet' type='text/css'>
+	  
+	<style>
+
+
+	</style>
+
+	<body class="w3-theme-l5"
+	      style="height: 100%">
+		<!-- Page Container -->
+		<div class="w3-container"
+		     style="width:100%;height:100%;margin-top:60px;align-items: center;display: flex">
+			<!-- The Grid -->
+			<div *ngIf="isAdmin"
+			     style="width: 100%;height:800px"> <br><br><br>
+				<div *ngIf="showAddAdminbutton">
+					<h4>User Username
+			 </h4> <input class="w3-input w3-border w3-round-large"
+					       type="text"
+					       style="width: 30%"
+					       [(ngModel)]="adminAddUsername"> <br><button *ngIf="showAddAdminbutton"
+					        (click)="AdminAddAdmin()"
+					        class="w3-button w3-border w3-round"
+					        type="text">Add as an Admin</button> <button (click)="viewProfile()"
+					        class="w3-button w3-border w3-round"
+					        type="text">View Profile</button></div>
+				<div *ngIf="showAcceptButtonAdmin">
+					<h4>User Username</h4> <input class="w3-input w3-border w3-round-large"
+					       type="text"
+					       style="width: 30%"
+					       [(ngModel)]="adminUserDisplay"> <br> <button *ngIf="showAcceptButtonAdmin"
+					        (click)="adminAcceptExpert()"
+					        class="w3-button w3-border w3-round"
+					        type="text">Accept</button> </div><br>
+				<h4>{{logAdmin}}</h4><br><br>
+				<h2>{{adminTableTitle}} (Rows are clickable)</h2>
+				<div class=" w3-container w3-border w3-round-xlarge"
+				     style="display:flex">
+					<ng2-smart-table [settings]="adminCurrentSettings"
+					                 [source]="adminCurrentData"
+					                 (userRowSelect)="onUserRowSelect($event)"
+					                 (deleteConfirm)="onDeleteCall($event)"
+					                 (createConfirm)="onCreateCall($event)"
+					                 (editConfirm)="onEditCall($event)"> </ng2-smart-table>
+				</div>
+			</div>
+			<div *ngIf="!isAdmin"
+			     class="w3-row"
+			     style="width:100% ">
+				<!-- Middle Column -->
+				<h1 tooltip="You are an Expert."
+				    flow="down"
+				    *ngIf="!visible"
+				    style="z-index:1;position: absolute; top: 9%;left:10%"><i class="fa fa-bookmark" style="color:#FCE200"></i></h1>
+				<div class="w3-col m7">
+					<div class="w3-row-padding">
+						<div class="w3-col m12">
+							<div class="w3-container w3-padding">
+								<div class="profile-card">
+									<div class="profile-cover"
+									     style="margin-top:20px;background:url('assets/new.jpg')center;">
+										<a (click)="editProfile()"
+										   style="cursor:pointer;overflow:hidden;color:black;float:right;margin-right:10px">
+											<h3><i class="active icon-pencil"></i></h3></a>
+										<div class="profile-avatar"> <a href="#"><img id="ava" src="{{user.profilePic}} " style="width:100%;height:100%;" alt="Anis M" /> </a> </div>
+										<div class="profile-details">
+											<h2 style="font-weight: bold">{{user.firstName}} {{user.lastName}} </h2>
+											<h3>{{user.username}}</h3>
+											<h5 style="color: #FCE200">{{user.job}}</h5>
+											<div class="profile-social-links"> <a class="social-btn twitter"
+												   href="#"><i class="fa fa-twitter"></i></a> <a class="social-btn instagram"
+												   href="#"><i class="fa fa-instagram"></i></a> <a class="social-btn facebook"
+												   href="#"><i class="fa fa-facebook"></i></a> </div>
+										</div>
+									</div>
+									<div class="profile-content"
+									     style="text-align:center;"><br>
+										 <div class="masthead">
+												  <div class="intro-text">
+													<div class="intro-heading text-uppercase">Rating</div>
+												 
+												</div>
+											  </div> <span class="rating-num">{{user.avgRating}}</span>
+										<ng-container *ngIf="user.avgRating === 5">
+											<div class="rating-stars"> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="active icon-star " style="color:#FCE200 "></i></span>												<span><i class="active icon-star " style="color:#FCE200 "></i></span> </div>
+										</ng-container>
+										<ng-container *ngIf="user.avgRating <5 && user.avgRating>4">
+											<div class="rating-stars"> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="active icon-star " style="color:#FCE200 "></i></span>												<span><i class="fa fa-star-half-full " style="color:#FCE200 "></i></span> </div>
+										</ng-container>
+										<ng-container *ngIf="user.avgRating === 4">
+											<div class="rating-stars"> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="active icon-star " style="color:#FCE200 "></i></span>												<span><i class="icon-star"></i></span> </div>
+										</ng-container>
+										<ng-container *ngIf="user.avgRating <4 && user.avgRating>3 ">
+											<div class="rating-stars"> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="fa fa-star-half-full " style="color:#FCE200 "></i></span>												<span><i class="icon-star " ></i></span> </div>
+										</ng-container>
+										<ng-container *ngIf="user.avgRating === 3">
+											<div class="rating-stars"> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="icon-star"></i></span>												<span><i class="icon-star"></i></span> </div>
+										</ng-container>
+										<ng-container *ngIf="user.avgRating <3 && user.avgRating>2 ">
+											<div class="rating-stars"> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="fa fa-star-half-full" style="color:#FCE200"></i></span> <span><i class="icon-star" ></i></span>												<span><i class="icon-star " ></i></span> </div>
+										</ng-container>
+										<ng-container *ngIf="user.avgRating === 2">
+											<div class="rating-stars"> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="icon-star"></i></span> <span><i class="icon-star"></i></span> <span><i class="icon-star"></i></span>												</div>
+										</ng-container>
+										<ng-container *ngIf="user.avgRating <2 && user.avgRating>1">
+											<div class="rating-stars"> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="fa fa-star-half-full" style="color:#FCE200"></i></span> <span><i class="icon-star" ></i></span> <span><i class="icon-star" ></i></span> <span><i class="icon-star " ></i></span>												</div>
+										</ng-container>
+										<ng-container *ngIf="user.avgRating === 1">
+											<div class="rating-stars"> <span><i class="active icon-star" style="color:#FCE200"></i></span> <span><i class="icon-star"></i></span> <span><i class="icon-star"></i></span> <span><i class="icon-star"></i></span> <span><i class="icon-star"></i></span> </div>
+										</ng-container>
+										<ng-container *ngIf="user.avgRating <1 && user.avgRating>0">
+											<div class="rating-stars"> <span><i class="fa fa-star-half-full" style="color:#FCE200"></i></span> <span><i class="icon-star" ></i></span> <span><i class="icon-star" ></i></span> <span><i class="icon-star" ></i></span> <span><i class="icon-star " ></i></span> </div>
+										</ng-container>
+										<ng-container *ngIf="user.avgRating === 0">
+											<div class="rating-stars"> <span><i class="icon-star"></i></span> <span><i class="icon-star"></i></span> <span><i class="icon-star"></i></span> <span><i class="icon-star"></i></span> <span><i class="icon-star"></i></span> </div>
+										</ng-container>
+										<hr style="height:2px;border:none;margin:50px;background-color:black;color:black">
+										<div class="masthead">
+												<div class="intro-text">
+												  <div class="intro-heading text-uppercase">About</div>
+											   
+											  </div>
+											</div>										<h6 style="color:black; padding: 20px">
+                            {{user.about}}</h6> </div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- schedule  -->
+					<div id="experiencesPart"
+					     style="margin-left:130px;margin-top:20px;width: 111.5%;margin-bottom:20px"
+					     class="w3-container w3-card w3-white w3-round "><br>
+						<div id="workexperience  "
+						     class="sectionClass ">
+							 <div class="masthead">
+									<div class="intro-text">
+									  <div class="intro-heading text-uppercase">Work Experience</div>
+								   
+								  </div>
+								</div>							<div style="display: flex;flex-direction: row; align-items: center ">
+								<h4>Stuff us with your accomplishments</h4>
+								<h3>
+								<a (click)="addExperienceHTML() "
+								  class="w3-button "><i class="fa fa-plus-square "></i></a></h3> </div>
+							<div style="position:relative;left:90%;top:-150px;width: 5%">
+								<h3>
+											<a (click)="updateExperiences()"
+											  class="w3-button  " ><h4>Save!</h4><i class="active icon-save "></i></a>
+										</h3> </div>
+							<div id="experiencesDiv"
+							     class="style-4"
+							     style="width: 100% ;height:400px;display:flex;flex-direction:column;overflow-y:scroll ">
+								<div class="cbp_tmtimeline "
+								     style="width: 80% "
+								     *ngFor="let experience of experiences ">
+									<li> <a (click)="removeExperience(experience)"
+										   style="position: absolute; right: 0;margin-right: 20px;margin-top: 10px;z-index: 1"><i style="color: #ffffff"class="fa fa-times"></i></a>
+										<div class="cbp_tmicon cbp_tmicon-phone "> <i class="faPra fa-briefcase "></i> </div>
+										<div class="cbp_tmlabel wow fadeInRight animated"> <input type="text"
+											       class="w3-input"
+											       style="background-color:transparent;font-size:30px;color:#ffffff;font-family:'Roboto';border: none!important;box-shadow: none!important;"
+											       [(ngModel)]="experience.job " />
+											<div class="date"
+											     style="margin-right:200px;width:100%;"> <i class="fa fa-calendar"></i> <input type="text"
+												       style="background-color:transparent;font-family:Arial;color:#ffffff;border: none!important;box-shadow: none!important;"
+												       [(ngModel)]="experience.date" /> </div>
+											<h4><i class="fa fa-flag  "></i></h4><input type="text "
+											       class="w3-input  "
+											       style="background-color:transparent;font-family:Arial; color:#ffffff"
+											       [(ngModel)]="experience.companyName" /> <textarea class="w3-input w3-card w3-round projectParagraph"
+											          style="background-color: black;color:#ffffff;font-family:Arial;"
+											          [(ngModel)]="experience.details"></textarea> </div>
+									</li>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- End Middle Column -->
+				</div>
+				<!-- Right Column -->
+				<div class="w3-col m2 "
+				     style="float:right;margin-top:40px;width:25%;">
+					<div *ngIf="visible"
+					     class="w3-card w3-round w3-center"
+					     style="cursor:pointer;background-color:black">
+						<div class="w3-container ">
+							<h4><a (click)="applyForExpert()"style="cursor:pointer;font:bold;color:white"> {{user.appliedForExpert?'Application sent successfully':'Apply for an Expert'}}<a (click)="applyForExpert()"
+								style="cursor:pointer;float:right;color:#FCE200"><i class="active icon-group " ></i></a></a></h4> </div>
+					</div> <br>
+					<!-- <br> -->
+					<ng-container *ngIf="user.type === 'expert'">
+
+					<div class="w3-card w3-round w3-center"
+					     style="cursor:pointer;background-color:black">
+						<div class="w3-container ">
+							<h4><a (click)="addTopic()"style="cursor:pointer;font:bold;color:white">Add a topic<a (click)="addTopic()"
+						   style="cursor:pointer;float:right;color:#FCE200"><i class="fa fa-plus-square " ></i></a></a></h4> </div>
+					</div><br> </ng-container>
+					<div class="w3-card w3-round w3-white w3-center">
+						<div class="w3-container">
+							<h4 style="font:bold">Contact <a (click)="contact(content)"
+								style="cursor:pointer;float:right"><i class="active icon-pencil" ></i></a></h4>
+							<hr style=" height:2px;border:none;background-color:black;color:black"> <a style="float:left;"><i style="margin-right:15px" class="fa fa-envelope"></i>{{user.email}}</a><br> <a style="float:left;"><i style="margin-right:17px" class="fa fa-phone"></i>{{user.phoneNumber}}</a><br> <a style="float:left;"><i style="margin-right:17px;width: 12px" class="fa fa-map-marker"></i><span></span>{{user.address}}</a><br></div>
+					</div> <br>
+					<div *ngIf="topic">
+						<div class="w3-card w3-round w3-center"
+						     style="background-color:white">
+							<div class="w3-container ">
+								<h4 style="font:bold;color:black">My Topics </h4>
+								
+								<hr style=" height:2px;border:none;color: black;background-color: black">
+								<div *ngIf="isExpert"
+								     class="cbp_tmtimeline style-4 "
+								     style=" width: 100% ;height:200px;display:flex;flex-direction:column;border:none !important;align-items:center;overflow-y:scroll;">
+									<div class="w3-card w3-round w3-center"
+									     style="cursor:pointer;background-color:#FCE200; font:bold;color:black;width:80%;margin-bottom:1%"
+									     *ngFor="let topic of topics">
+										<h3 style="font-weight: bold; font-family:monospace; text-transform: uppercase;"> {{topic.topicTitle}}</h3> </div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<br>
+					<div *ngIf="type === 'expert'">
+						<div class="w3-card w3-round w3-white w3-center" >
+							<h4 style="font:bold">Block User </h4> <a href="/#/blockedusers" style= "color:red"> View list of blocked users.</a>
+							<hr style=" height:2px;border:none;background-color:black;color:black"> <input class="form-control"
+							       type="text"
+							       style="color: black"
+							       [(ngModel)]="blockedname"
+							       name="blockedname"
+							       id="blockedname"
+							       required /> <br> <button class="w3-button "
+							        style="background-color:#fce200;"
+							        type="submit"
+							        (click)="blockuser()">
+									<i class="fa fa-paper-plane"></i> Block
+								</button> </div><br> </div>
+					<div id="notesPart"
+					     class="w3-container w3-card w3-white w3-round " ><br>
+						<div style="display:flex;flex-direction:row; width: 100%;align-items:center">
+							<div style="display:flex;flex-direction:column;width:80%">
+								<h2 style="font-weight:bold;display:flex;flex-direction:row;align-items:center">My Notes <h2 style="font-weight:thin"> : {{this.notes.length}}</h2></h2>
+								<div style="display:flex;flex-direction:row;align-items:center">
+									<h4>Let us help you remember</h4>
+									<h3>
+								<a (click)="addNoteHTML()"
+								  class="w3-button"><i class="fa fa-plus-square"></i></a></h3></div>
+							</div>
+							
+							<div style="position:relative;">
+								<h3 style="margin-bottom: 20%"><a (click)="updateNotes()" class="w3-button"><h4>Save!</h4><i class="active icon-save "></i></a>
+																			</h3> </div>
+						</div>
+						<div id="notesDiv"
+						     style="display:flex;flex-direction:row;overflow-x:scroll;height:183px"
+						     class="w3-border w3-round style-4">
+							<div class="perspective"
+							     style="margin-top:3%;height: 145px;flex:0 0 50%;"
+							     *ngFor="let noteSamp of notes ">
+								<div class="note "> <a (click)="removeNote(noteSamp)"
+									   style="position: absolute; right: 0;margin-right: 20px "><i class="fa fa-times"></i></a> <input type="text"
+									       class="w3-input"
+									       style="background-color:transparent;color: #FCE200;font-weight: bold"
+									       [(ngModel)]="noteSamp.noteTitle" /> <textarea class="w3-input w3-card w3-round "
+									          style="background-color:  transparent;color: #FCE200;border: none; "
+									          [(ngModel)]="noteSamp.note"></textarea> </div>
+							</div>
+						</div>
+					</div>
+					<!-- End Right Column -->
+				</div>
+				<!-- End Grid -->
+			</div>
+			<!-- End Page Container -->
+		</div>
+		<div id="modal "
+		     class="w3-center w3-modal w3-animate-opacity">
+			<div class="w3-modal-content w3-sand"> <span onclick="document.getElementById('modal').style.display='none'"
+				      class="w3-button w3-display-topright ">&times;</span>
+				<h2 style="color:black "
+				    class="w3-xxlarge  w3-black  w3-padding-48">{{responseMessage}}</h2> </div>
+		</div>
+	</body>
+
+</html>

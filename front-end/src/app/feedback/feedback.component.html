@@ -1,0 +1,197 @@
+
+<body >
+  <br><br><br>
+  <div class="intro-heading text-uppercase">Rating </div>
+     
+  <ng-container *ngIf="user.type === 'expert' "> 
+        <div *ngFor="let question of questions; let i=index"
+          (click)="selectQuestion(question)"
+          [ngClass]="{'selected':questions[i] == i}"
+         class="snip1578">
+            <img src="{{question.user.profilePic}}" alt="profile-sample6" />
+            <figcaption>
+                <h3 style="margin-left: 20px">{{question.user.username}}</h3>
+                <br>
+                <input type="radio" name="stars" id="star-1" style="display:none" />
+                <input type="radio" name="stars" id="star-2" style="display:none" />
+                <input type="radio" name="stars" id="star-3" style="display:none" />
+                <input type="radio" name="stars" id="star-4" style="display:none" checked />
+                <input type="radio" name="stars" id="star-5"  style="display:none" />
+                
+                <section>
+                  <label for="star-1">
+                    <svg width="255" height="240" viewBox="0 0 51 48">
+                      <path d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"/>
+                    </svg>
+                  </label>
+                  <label for="star-2">
+                    <svg width="255" height="240" viewBox="0 0 51 48">
+                      <path d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"/>
+                    </svg>
+                  </label>
+                  <label for="star-3">
+                    <svg width="255" height="240" viewBox="0 0 51 48">
+                      <path d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"/>
+                    </svg>
+                  </label>
+                  <label for="star-4">
+                    <svg width="255" height="240" viewBox="0 0 51 48">
+                      <path d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"/>
+                    </svg>
+                  </label>
+                  <label for="star-5">
+                    <svg width="255" height="240" viewBox="0 0 51 48">
+                      <path d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"/>
+                    </svg>
+                  </label>
+                 
+                </section>
+                <br><br>
+                <div class="demo-container">
+                    <div class="tb-container">
+                      <textarea class="aumd-tb" [(ngModel)]="feedback" id="inputid" name="inputName" cols="30" rows="4" type="text" placeholder=" "></textarea>
+                      <label class="aumd-tb-label" for="inputName">Feedback</label>
+                      <span class="validation"></span>
+                    </div>
+                    </div>
+                              </figcaption>
+                              <div class='buttons' style="float: right;">
+                      
+                                  <div class='col'>
+                                    <a class='button -accept js-accept' style="height: 50px;float: right; cursor: pointer;" (click)="submitFeedbackUser()">
+                                      Submit
+                                    </a>
+                            </div>
+                          </div>
+                            </div>
+                
+
+          <div *ngFor="let request of requests; let i=index"
+          (click)="selectRequest(request)"
+          [ngClass]="{'selected':requests[i] == i}"
+          class="snip1578">
+              <img src="{{request.expert.profilePic}}" alt="profile-sample6" />
+              <figcaption>
+                  <h3 style="margin-left: 20px">{{request.expert.username}}</h3>
+                  <br>
+                  <input type="radio" name="stars" id="star-1" style="display:none" />
+                  <input type="radio" name="stars" id="star-2" style="display:none" />
+                  <input type="radio" name="stars" id="star-3" style="display:none" />
+                  <input type="radio" name="stars" id="star-4" style="display:none" checked />
+                  <input type="radio" name="stars" id="star-5"  style="display:none" />
+                  
+                  <section>
+                    <label for="star-1">
+                      <svg width="255" height="240" viewBox="0 0 51 48">
+                        <path d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"/>
+                      </svg>
+                    </label>
+                    <label for="star-2">
+                      <svg width="255" height="240" viewBox="0 0 51 48">
+                        <path d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"/>
+                      </svg>
+                    </label>
+                    <label for="star-3">
+                      <svg width="255" height="240" viewBox="0 0 51 48">
+                        <path d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"/>
+                      </svg>
+                    </label>
+                    <label for="star-4">
+                      <svg width="255" height="240" viewBox="0 0 51 48">
+                        <path d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"/>
+                      </svg>
+                    </label>
+                    <label for="star-5">
+                      <svg width="255" height="240" viewBox="0 0 51 48">
+                        <path d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"/>
+                      </svg>
+                    </label>
+                   
+                  </section>
+                  <br><br>
+                  <div class="demo-container">
+                      <div class="tb-container">
+                        <textarea class="aumd-tb"  [(ngModel)]="feedback" id="inputid" name="inputName" cols="30" rows="4" type="text" placeholder=" "></textarea>
+                        <label class="aumd-tb-label" for="inputName">Feedback</label>
+                        <span class="validation"></span>
+                      </div>
+                      </div>
+                                </figcaption>
+                                <div class='buttons' style="float: right;">
+                        
+                                    <div class='col'>
+                                      <a class='button -accept js-accept' style="height: 50px; cursor: pointer;" (click)="submitFeedbackExpert()">
+                                        Submit
+                                      </a>
+                              </div>
+                            </div>
+                              </div>
+                  
+          </ng-container>
+
+          <ng-container *ngIf="user.type === 'user' "> 
+          <div *ngFor="let request of requests; let i=index"
+          (click)="selectRequest(request)"
+          [ngClass]="{'selected':requests[i] == i}"
+           class="snip1578">
+              <img src="{{request.expert.profilePic}}" alt="profile-sample6" />
+              <figcaption>
+                <h3 style="margin-left: 20px">{{request.expert.username}}</h3>
+<br>
+<input type="radio" name="stars" id="star-1" style="display:none" />
+<input type="radio" name="stars" id="star-2" style="display:none" />
+<input type="radio" name="stars" id="star-3" style="display:none" />
+<input type="radio" name="stars" id="star-4" style="display:none" checked />
+<input type="radio" name="stars" id="star-5"  style="display:none" />
+
+<section>
+  <label for="star-1">
+    <svg width="255" height="240" viewBox="0 0 51 48">
+      <path d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"/>
+    </svg>
+  </label>
+  <label for="star-2">
+    <svg width="255" height="240" viewBox="0 0 51 48">
+      <path d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"/>
+    </svg>
+  </label>
+  <label for="star-3">
+    <svg width="255" height="240" viewBox="0 0 51 48">
+      <path d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"/>
+    </svg>
+  </label>
+  <label for="star-4">
+    <svg width="255" height="240" viewBox="0 0 51 48">
+      <path d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"/>
+    </svg>
+  </label>
+  <label for="star-5">
+    <svg width="255" height="240" viewBox="0 0 51 48">
+      <path d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"/>
+    </svg>
+  </label>
+ 
+</section>
+<br><br>
+<div class="demo-container">
+    <div class="tb-container">
+      <textarea class="aumd-tb" [(ngModel)]="feedback" id="inputid" name="inputName" cols="30" rows="4" type="text" placeholder=" "></textarea>
+      <label class="aumd-tb-label" for="inputName">Feedback</label>
+      <span class="validation"></span>
+    </div>
+    </div>
+              </figcaption>
+              <div class='buttons'>
+      
+                  <div class='col'>
+                    <a class='button -accept js-accept' style="height: 50px;float: right; cursor: pointer;" (click)="submitFeedbackExpert()">
+                      Submit
+                    </a>
+            </div>
+          </div>
+            </div>
+
+            
+            </ng-container>
+          <br><br><br><br>
+</body>

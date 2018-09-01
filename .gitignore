@@ -1,0 +1,5 @@
+.DS_Store
+!$Product Backlog
+.idea
+.vscode
+TodoApp-Frontend-Angular

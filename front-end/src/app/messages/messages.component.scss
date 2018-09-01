@@ -1,0 +1,557 @@
+
+  
+  /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
+  body {
+    background-color: #f3f3f3;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+  
+  section {
+    width: 500px;
+    margin: 60px auto;
+    background-color: #fff;
+    padding: 10px 15px 20px 15px;
+  }
+  
+  .chat ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .chat ul li {
+    margin: 45px 0 0 0;
+    font-weight: 300;
+  }
+  .chat ul li a.user {
+    margin: -30px 0 0 0;
+    display: block;
+    color: #333;
+  }
+  .chat ul li a.user img {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background-color: #f3f3f3;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  }
+  .chat ul li .date {
+    font-size: 14px;
+    color: #a6a6a6;
+  }
+  .chat ul li .message {
+    display: block;
+    padding: 10px;
+    position: relative;
+    color: black;
+    font-size: 15px;
+    background-color: white;
+    border-radius: 3px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    min-height: 60px;
+  }
+  .chat ul li .message:before {
+    content: '';
+    position: absolute;
+    border-top: 16px solid rgba(0, 0, 0, 0.15);
+    border-left: 16px solid transparent;
+    border-right: 16px solid transparent;
+  }
+  .chat ul li .message:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    border-top: 17px solid white;
+    border-left: 17px solid transparent;
+    border-right: 17px solid transparent;
+  }
+  .chat ul li .message.blur p {
+    -webkit-filter: blur(3px);
+    -moz-filter: blur(3px);
+    -o-filter: blur(3px);
+    -ms-filter: blur(3px);
+    filter: blur(3px);
+  }
+  .chat ul li .message.blur .hider {
+    opacity: 1;
+    z-index: 1;
+  }
+  .chat ul li .message p {
+    margin: 0;
+    padding: 0;
+    transition: all 0.1s;
+  }
+  .chat ul li .message .hider {
+    opacity: 0;
+    z-index: -1;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    margin: -10px;
+    text-align: center;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: all 0.1s;
+  }
+  .chat ul li .message .hider span {
+    display: block;
+    position: relative;
+    top: 50%;
+    font-size: 16px;
+    transform: translateY(-50%);
+  }
+  .chat ul li.other a.user {
+    float: right;
+  }
+  .chat ul li.other .date {
+    float: right;
+    margin: -20px 10px 0 0;
+  }
+  .chat ul li.other .message {
+    margin: 0 90px 0 0;
+  }
+  .chat ul li.other .message:before {
+    margin: -9px -16px 0 0;
+    right: 0;
+  }
+  .chat ul li.other .message:after {
+    content: '';
+    right: 0;
+    margin: 0 -15px 0 0;
+  }
+  .chat ul li.you a.user {
+    float: left;
+  }
+  .chat ul li.you .date {
+    float: left;
+    margin: -20px 0 0 10px;
+  }
+  .chat ul li.you .message {
+    margin: 0 0 0 90px;
+  }
+  .chat ul li.you .message:before {
+    margin: -9px 0 0 -16px;
+    left: 0;
+  }
+  .chat ul li.you .message:after {
+    content: '';
+    left: 0;
+    margin: 0 0 0 -15px;
+  }
+  
+
+  //-----------------------------------------------------------------------------------------------
+
+  //--------------------
+
+
+.progress:after {
+  content: attr(value) "%";
+  margin-left: 20px;
+  font-weight: bold;
+  width: 2em;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.button {
+  width: 35px;
+  height: 35px;
+  flex: 0 0 75px;
+  border-radius: 50%;
+  color: #fff;
+  border: 5px solid #fff;
+}
+.button.button-accept {
+  background: #4fd364;
+}
+.button.button-reject {
+  background: #f74c4a;
+}
+.button.button-pending {
+    background: black ;
+  }
+.button:first-child {
+  margin-right: 25px;
+}
+.button:hover {
+  -webkit-transform: translateX(1px) translateY(1px);
+          transform: translateX(1px) translateY(1px);
+}
+
+.button-icon {
+  width: 100%;
+  height: 100%;
+}
+
+.progress-container {
+  background: #fff;
+  font: normal normal 16px -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  border: 2px solid #eee;
+  padding: 25px;
+  max-width: 100%;
+}
+
+.container {
+  max-width: 100%;
+  padding: 25px;
+}
+
+svg {
+  fill: currentColor;
+}
+
+//==================================
+@import url(https://fonts.googleapis.com/css?family=Raleway:100,300);
+$font: 'Raleway', sans-serif;
+
+
+.buttons{
+  width: 90%;
+  margin: 20px auto;
+  .col{
+    width: 50%;
+    float: left;
+  }
+  .button{
+    margin: 0 auto;
+    width: 80%;
+    display: block;
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 4px;
+    border-width: 1px;
+    border-style: solid;
+    color: black;
+    text-decoration: none;
+    &.-decline{
+      border-color: #FF0C21;
+      background: rgba(203,0,18,.14);
+      &:hover{
+        background: lighten(#FF0C21,1%);
+      }
+    }
+    &.-accept{
+      border-color: #69C915;
+      background: rgba(169,228,114,.12);
+      &:hover{
+        background: lighten(#69C915,1%);
+      }
+    }
+  }
+}
+
+
+
+label {
+  font-size: 22px;
+  text-transform: uppercase;
+  color: black;
+  text-align:center;
+}
+
+
+
+
+.btn--form {
+  padding: .5rem 2.5rem;
+  font-size: .95rem;
+  font-family: "Proxima Nova Reg";
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #fff;
+  background: #FCE100;
+  border-radius: 2.1875rem;
+  font-weight: bold;
+}
+
+.btn--form:focus,
+.btn--form:hover {
+  background: #323232;
+}
+//=== dropdown
+
+
+.container > .dropdown {
+  margin: 0 20px;
+  vertical-align: top;
+}
+
+.dropdown {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  height: 28px;
+  width: 150px;
+  background: #f2f2f2;
+  border: 1px solid;
+  border-color: white #f7f7f7 whitesmoke;
+  border-radius: 3px;
+  background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
+  background-image: -moz-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
+  background-image: -o-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
+  background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.06));
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+}
+
+.dropdown:before, .dropdown:after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  top: 9px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 4px dashed;
+  border-color: #888888 transparent;
+  pointer-events: none;
+}
+
+.dropdown:before {
+  border-bottom-style: solid;
+  border-top: none;
+}
+
+.dropdown:after {
+  margin-top: 7px;
+  border-top-style: solid;
+  border-bottom: none;
+}
+
+.dropdown-select {
+  position: relative;
+  width: 130%;
+  margin: 0;
+  padding: 6px 8px 6px 10px;
+  height: 28px;
+  line-height: 14px;
+  font-size: 12px;
+  color: #62717a;
+  text-shadow: 0 1px white;
+  background: #f2f2f2; /* Fallback for IE 8 */
+  background: rgba(0, 0, 0, 0) !important; /* "transparent" doesn't work with Opera */
+  border: 0;
+  border-radius: 0;
+  -webkit-appearance: none;
+}
+
+.dropdown-select:focus {
+  z-index: 3;
+  width: 100%;
+  color: #394349;
+  outline: 2px solid #49aff2;
+  outline: 2px solid -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+.dropdown-select > option {
+  margin: 3px;
+  padding: 6px 8px;
+  text-shadow: none;
+  background: #f2f2f2;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+/* Fix for IE 8 putting the arrows behind the select element. */
+
+.lt-ie9 .dropdown {
+  z-index: 1;
+}
+
+.lt-ie9 .dropdown-select {
+  z-index: -1;
+}
+
+.lt-ie9 .dropdown-select:focus {
+  z-index: 3;
+}
+
+/* Dirty fix for Firefox adding padding where it shouldn't. */
+
+@-moz-document url-prefix() {
+  .dropdown-select {
+    padding-left: 6px;
+  }
+}
+
+.dropdown-dark {
+  background: #444;
+  border-color: #111111 #0a0a0a black;
+  background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.4));
+  background-image: -moz-linear-gradient(top, transparent, rgba(0, 0, 0, 0.4));
+  background-image: -o-linear-gradient(top, transparent, rgba(0, 0, 0, 0.4));
+  background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.4));
+  -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.1), 0 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.1), 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-dark:before {
+  border-bottom-color: #aaa;
+}
+
+.dropdown-dark:after {
+  border-top-color: #aaa;
+}
+
+.dropdown-dark .dropdown-select {
+  color: #aaa;
+  text-shadow: 0 1px black;
+  background: #444;  /* Fallback for IE 8 */
+}
+
+.dropdown-dark .dropdown-select:focus {
+  color: #ccc;
+}
+
+.dropdown-dark .dropdown-select > option {
+  background: #444;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.4);
+}
+
+
+
+//==================
+
+
+h1 {
+  font-family: 'Alegreya Sans', sans-serif;
+  font-weight: 300;
+  margin-top: 0;
+}
+.control-group {
+  display: inline-block;
+  vertical-align: top;
+  background: #fff;
+  text-align: left;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  padding: 30px;
+  width: 200px;
+  height: 210px;
+  margin: 10px;
+}
+.control {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  font-size: 18px;
+}
+.control input {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+.control__indicator {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background: #e6e6e6;
+}
+.control--radio .control__indicator {
+  border-radius: 50%;
+}
+.control:hover input ~ .control__indicator,
+.control input:focus ~ .control__indicator {
+  background: #ccc;
+}
+.control input:checked ~ .control__indicator {
+  background: #FCE200;
+}
+.control:hover input:not([disabled]):checked ~ .control__indicator,
+.control input:checked:focus ~ .control__indicator {
+  background: #FCE200;
+}
+.control input:disabled ~ .control__indicator {
+  background: #e6e6e6;
+  opacity: 0.6;
+  pointer-events: none;
+}
+.control__indicator:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+.control input:checked ~ .control__indicator:after {
+  display: block;
+}
+.control--checkbox .control__indicator:after {
+  left: 8px;
+  top: 4px;
+  width: 3px;
+  height: 8px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.control--checkbox input:disabled ~ .control__indicator:after {
+  border-color: #7b7b7b;
+}
+.control--radio .control__indicator:after {
+  left: 7px;
+  top: 7px;
+  height: 6px;
+  width: 6px;
+  border-radius: 50%;
+  background: #fff;
+}
+.control--radio input:disabled ~ .control__indicator:after {
+  background: #7b7b7b;
+}
+.select {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 15px;
+  width: 100%;
+}
+.select select {
+  display: inline-block;
+  width: 100%;
+  cursor: pointer;
+  padding: 10px 15px;
+  outline: 0;
+  border: 0;
+  border-radius: 0;
+  background: #e6e6e6;
+  color: #7b7b7b;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+.select select::-ms-expand {
+  display: none;
+}
+.select select:hover,
+.select select:focus {
+  color: #000;
+  background: #ccc;
+}
+.select select:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+.select__arrow {
+  position: absolute;
+  top: 16px;
+  right: 15px;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  border-style: solid;
+  border-width: 8px 5px 0 5px;
+  border-color: #7b7b7b transparent transparent transparent;
+}
+.select select:hover ~ .select__arrow,
+.select select:focus ~ .select__arrow {
+  border-top-color: #000;
+}
+.select select:disabled ~ .select__arrow {
+  border-top-color: #ccc;
+}
